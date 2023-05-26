@@ -8,6 +8,27 @@
 </head>
 <body>
 <script>
+
+let pressedArr = []
+const secretWord = 'bingbong'
+
+function storeLetter(e) {
+  console.log(e.key)
+  pressedArr.push(e.key)
+  console.log(pressedArr)
+  pressedArr.splice(-secretWord.length - 1, pressedArr.length - secretWord.length)
+  if(pressedArr.join('').includes(secretWord)) {
+    console.log('Passwrd correct')
+    pressedArr = []
+    cornify_add()
+  }
+}
+
+document.addEventListener('keydown', storeLetter)
+
+
+
+
 </script>
 </body>
 </html>
