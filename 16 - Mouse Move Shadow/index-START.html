@@ -36,6 +36,53 @@
   </style>
 
 <script>
+  const title = document.querySelector('.hero')
+  const textTitle = title.querySelector('h1')
+
+  function debounce(func, wait = 1, immediate = true) {
+      var timeout;
+      return function() {
+        var context = this, args = arguments;
+        var later = function() {
+          timeout = null;
+          if (!immediate) func.apply(context, args);
+        };
+        var callNow = immediate && !timeout;
+        clearTimeout(timeout);
+        timeout = setTimeout(later, wait);
+        if (callNow) func.apply(context, args);
+      };
+    };
+
+  function moveShadow(e) {
+    const width = title.offsetWidth
+    const height = title.offsetHeight
+    const walk = 100
+
+    let x = e.offsetX
+    let y = e.offsetY
+
+    if(textTitle !== e.target) {
+      x += e.target.offsetLeft
+      y += e.target.offsetTop
+    }
+
+    const xWalk = Math.round((x / width * walk) - (walk / 2))
+    const yWalk = Math.round((y / width * walk) - (walk / 2))
+
+    textTitle.style.textShadow = `
+    ${xWalk}px ${yWalk}px 0 blue,
+    ${xWalk * 1.5}px ${yWalk}px 0 blue,
+    ${xWalk}px ${yWalk * 1.5}px 0 blue
+    `
+
+    console.log(xWalk, yWalk)
+  }
+
+  addEventListener('mousemove', debounce(moveShadow))
+
 </script>
+
+
 </body>
 </html>
