@@ -55,6 +55,27 @@
   </div>
 
 <script>
+  const navbar = document.querySelector("#main")
+  const logo = document.querySelector(".logo")
+  const navTitle = document.querySelectorAll("li")
+  let topOfNav = navbar.offsetTop;
+
+
+  function displayMessage() {
+    console.log(`ScrollY window = ${window.scrollY}`)
+    console.log(`dessus navbar = ${navbar.offsetTop}`)
+
+    if (window.scrollY >= topOfNav) {
+      navbar.style.position = "fixed"
+      logo.style.maxWidth = "100%"
+    } else {
+      navbar.style.position = "relative"
+      logo.style.maxWidth = "0%"
+    }
+  }
+
+  document.addEventListener('scroll', displayMessage)
+
 
 </script>
 
